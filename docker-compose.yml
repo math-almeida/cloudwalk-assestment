@@ -1,0 +1,33 @@
+version: "3.9"
+x-app: &x-app
+  build: .
+  volumes:
+    - .:/cloudwalk-assestment
+  depends_on:
+    - db
+    - queue
+services:
+  db:
+    image: postgres
+    volumes:
+      - db_path:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+
+  web:
+    <<: *x-app
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - 3000:3000
+
+  sidekiq:
+    <<: *x-app
+    command: bash -c "bundle exec sidekiq -C config/sidekiq.yml"
+
+  queue:
+    image: redis:6.2.6
+    ports:
+      - 6379:6379
+
+volumes:
+  db_path:
