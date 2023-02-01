@@ -1,24 +1,51 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Cloudwalk Assestment
 
-Things you may want to cover:
+Technical challenge for Cloudwalk company
 
-* Ruby version
+## Dependencies
 
-* System dependencies
+The following dependencies are required to run the project:
+- `docker`
+- `docker-compose`
 
-* Configuration
+## Getting Started
 
-* Database creation
+Setup the databases and build the project by running:
 
-* Database initialization
+```
+$ make setup
+```
 
-* How to run the test suite
+## Database setup
 
-* Services (job queues, cache servers, search engines, etc.)
+Setup databases and migrations
 
-* Deployment instructions
+```bash
+make setup
+```
 
-* ...
+## Testing the API
+
+You can run all containers with:
+
+```
+make start
+```
+
+And check if the service is up by running:
+
+```
+make check
+```
+
+If everything is up, you are ready to test the code!
+
+## Tests
+
+If you want to run a test suite, for example, just run:
+
+```
+make test
+```
